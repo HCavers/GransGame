@@ -8,18 +8,16 @@ import android.graphics.Color;
  */
 
 public abstract class Sprite {
-    private float x;
-    private float y;
-    private float speed;
-    private float size;
-    Color colour;
+    protected float x;
+    protected float y;
+    protected float speed;
+    protected float size;
 
-    public Sprite(float _x, float _y, float _speed, float _size, int _colour){
+    public Sprite(float _x, float _y, float _speed, float _size){
         x = _x;
         y = _y;
         speed = _speed;
         size = _size;
-        colour = Color.valueOf(_colour);
     }
 
     abstract void draw(Canvas canvas);
