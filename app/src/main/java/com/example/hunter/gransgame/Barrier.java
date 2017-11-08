@@ -1,6 +1,7 @@
 package com.example.hunter.gransgame;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 
 /**
@@ -16,5 +17,9 @@ public class Barrier extends Sprite {
     public void updatePos(){}
 
     @Override
-    public void draw(Canvas canvas){}
+    public void draw(Canvas canvas){
+        Paint p = new Paint();
+        p.setColor(Color.BLACK);
+        canvas.drawRect(x, y, x + 250, y + 30, p);
+    }
 }
