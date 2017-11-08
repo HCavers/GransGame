@@ -8,15 +8,13 @@ import android.graphics.Paint;
  * Created by hunter on 7/11/2017.
  */
 
-public class damageBall extends Sprite {
-    public damageBall(float x, float y, float speed, float size){
+public class DamageBall extends Sprite {
+    public DamageBall(float x, float y, float speed, float size){
         super(x, y, speed, size);
     }
 
     @Override
-    public void updatePos(){
-        super.y += super.speed;
-    }
+    public void updatePos(){ super.y += super.speed; }
 
     @Override
     public void draw(Canvas canvas){

@@ -8,9 +8,9 @@ import android.graphics.Paint;
  * Created by hunter on 6/11/2017.
  */
 
-public class lifeBall extends Sprite {
+public class LifeBall extends Sprite {
 
-    public lifeBall(float x, float y, float speed, float size){
+    public LifeBall(float x, float y, float speed, float size){
         super(x, y, speed, size);
     }
 
