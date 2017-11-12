@@ -18,24 +18,49 @@ public class GraphicsView extends View {
 
     public GraphicsView(Context c, LinkedList<Sprite> _sprites){
         super(c);
+        rand = new Random();
         sprites = _sprites;
         count = 0;
     }
 
     @Override
     protected void onDraw(Canvas canvas){
+        drawSprites(canvas);
+        addNewSprite(canvas.getWidth());
+        invalidate();
+    }
+
+    private void drawSprites(Canvas canvas){
         for(Sprite sprite : sprites){
             sprite.draw(canvas);
             sprite.updatePos();
         }
+    }
+
+    private void addNewSprite(int range){
         if(count > 20){
             float multiplier = rand.nextFloat();
-            float range = (float)canvas.getWidth();
             float x = range * multiplier;
-            sprites.add(new Ball(300, 100, 20, 50));
+            if(x < 50){
+                x = 50;
+            }else if(x > range - 50){
+                x = range - 50;
+            }
+            int spriteType = rand.nextInt(6);
+            if(spriteType < 4){
+                sprites.add(new Ball(x, 100, 20, 50));
+            }else if(spriteType < 5){
+                sprites.add(new LifeBall(x, 100, 20, 50));
+            }else{
+                sprites.add(new DamageBall(x, 100, 20, 50));
+            }
             count = 0;
         }
         count++;
-        invalidate();
+    }
+
+    public void updateBarrier(float velocity){
+        Barrier temp = (Barrier)sprites.get(0);
+        temp.setVelocity(velocity);
     }
 }
