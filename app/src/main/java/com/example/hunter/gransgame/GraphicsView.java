@@ -25,6 +25,7 @@ public class GraphicsView extends View {
 
     @Override
     protected void onDraw(Canvas canvas){
+        setBarrierBounds(canvas.getWidth());
         drawSprites(canvas);
         addNewSprite(canvas.getWidth());
         invalidate();
@@ -59,8 +60,8 @@ public class GraphicsView extends View {
         count++;
     }
 
-    public void updateBarrier(float velocity){
-        Barrier temp = (Barrier)sprites.get(0);
-        temp.setVelocity(velocity);
+    private void setBarrierBounds(int bound){
+        Barrier barrier = (Barrier)sprites.get(0);
+        barrier.setBounds(bound);
     }
 }

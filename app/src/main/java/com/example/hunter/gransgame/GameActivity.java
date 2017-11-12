@@ -16,10 +16,11 @@ public class GameActivity extends AppCompatActivity {
     GraphicsView gv;
     SensorManager smgr;
     Sensor accel;
+    Barrier barrier;
     SensorEventListener accel_listener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
-            gv.updateBarrier(sensorEvent.values[0]);
+            barrier.updateBarrier(sensorEvent.values[0] * 2);
         }
         @Override
         public void onAccuracyChanged(Sensor sensor, int i) {
@@ -32,7 +33,8 @@ public class GameActivity extends AppCompatActivity {
         smgr = (SensorManager)getSystemService(SENSOR_SERVICE);
         accel = smgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         LinkedList<Sprite> sprites = new LinkedList<Sprite>();
-        sprites.add(new Barrier(400, 1850, 50, 100));
+        barrier = new Barrier(400, 1850, 0, 100);
+        sprites.add(barrier);
         super.onCreate(savedInstanceState);
         gv = new GraphicsView(this, sprites);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -42,12 +44,12 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        smgr.registerListener(accel_listener, accel, SensorManager.SENSOR_DELAY_NORMAL);
+        smgr.unregisterListener(accel_listener, accel);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        smgr.unregisterListener(accel_listener, accel);
+        smgr.registerListener(accel_listener, accel, SensorManager.SENSOR_DELAY_FASTEST);
     }
 }
